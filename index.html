@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <title>Las Cosas que Amo de Valuntina</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #fff;
+        color: #333;
+        text-align: center;
+    }
+    
+    .intro a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+    }
+    
+    .header {
+        background-color: #ffb6c1; /* Rosa pastel */
+        padding: 20px;
+        color: #fff;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .intro {
+        background-color: #ffb6c1; /* Rosa pastel */
+        padding: 20px 20px 150px; /* Ajuste de padding */
+        position: relative;
+        color: #fff;
+    }
+    
+    .intro .foto {
+        width: 100%;
+        border-radius: 20px;
+    }
+    
+    .intro .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -50px; /* Para superponer el corazón sobre la imagen */
+    }
+    
+    .intro box-icon {
+        background-color: #ffb6c1;
+        border-radius: 50%;
+        padding: 10px;
+        animation: heartbeat 1.5s infinite;
+    }
+    
+    @keyframes heartbeat {
+        0%, 28%, 70% {
+            transform: scale(1);
+        }
+        14%, 42%, 84% {
+            transform: scale(1.3);
+        }
+    }
+    
+    .intro button {
+        background-color: #fff;
+        color: #ffb6c1;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2em;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        margin-top: 20px; /* Espacio entre el corazón y el botón */
+    }
+    
+    .intro button:active {
+        transform: scale(0.95);
+        background-color: #ff8a9c;
+    }
+    
+    .intro::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 150px;
+        background-color: #ffb6c1;
+        border-radius: 50% 50% 0 0;
+        z-index: 1;
+    }
+    
+    .story {
+        padding: 20px;
+        position: relative;
+        background-color: #fff;
+    }
+    
+    .story h2 {
+        color: #ffb6c1;
+        margin-bottom: 10px;
+    }
+    
+    .story p {
+        color: #333;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+    
+    .icons {
+        margin-top: 10px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .icon {
+        background-color: #ffb6c1;
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    hr {
+        margin-top: 70px;
+        margin-bottom: 50px;
+        height: 12px;
+        border: 0;
+        box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+    }
+    
+    .textoH2 {
+        padding: 10px;
+    }
+    
+    .parrafo {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    /* Rest of your CSS... */
+    
+    .carousel-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    
+    .carousel-container {
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        height: 80%;
+        max-height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .carousel {
+        display: flex;
+        transition: transform 0.5s ease;
+        width: 100%; /* Ensure carousel takes up full width of the container */
+    }
+    
+    .carousel-item {
+        position: relative;
+        min-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        display: none; /* Hide all items initially */
+    }
+    
+    .carousel-item.active {
+        display: block; /* Show active item */
+    }
+    
+    .carousel-item img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Ensure images are contained within their containers */
+        border-radius: 10px;
+    }
+    
+    .carousel-caption {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 1em;
+        max-width: 80%;
+    }
+    
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    .carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 50px;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+        user-select: none;
+        padding: 10px;
+    }
+    
+    .carousel-nav.left {
+        left: 20px;
+    }
+    
+    .carousel-nav.right {
+        right: 20px;
+    }
+    
+    .music-section {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        text-align: center;
+    }
+    
+    .music-section p {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    
+    .audio-player {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background-color: #ffe4e1;
+        padding: 10px;
+        border: 1px solid #ffb6c1;
+        border-radius: 10px;
+    }
+    
+    .audio-player button {
+        padding: 10px 20px;
+        background-color: #ffb6c1;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-size: 1em;
+    }
+    
+    .audio-player button:hover {
+        background-color: #ff99a1;
+    }
+    
+    .audio-player input[type="range"] {
+        width: 200px;
+        accent-color: #ffb6c1; /* This will set the color of the range input thumb and track */
+    }
+    
+    .audio-player span {
+        font-size: 1em;
+        color: #333;
+    }
+
+    .timeline {
+    margin-top: 40px;
+}
+.timeline-item {
+    margin: 20px 0;
+    padding: 10px;
+    border-left: 2px solid #ffb6c1;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer; /* Agrega un indicador visual cuando el mouse pasa sobre el elemento */
+    background-color: #fff; /* Fondo inicial */
+}
+
+.timeline-item:hover {
+    transform: translateY(-5px); /* Eleva el elemento */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Agrega una sombra para dar efecto de elevación */
+    background-color:#ffebf0; /* Cambia el color de fondo al hacer hover */
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background-color: #ffb6c1;
+    border-radius: 50%;
+    transition: background-color 0.2s ease; /* Suaviza la transición de color */
+}
+
+.timeline-item:hover::before {
+    background-color:#ff99a1; /* Cambia el color del indicador al hacer hover */
+}
+
+.footer {
+    background-color:#ffb6c1; /* Rosa pastel */
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 1.2em;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+.post-it-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.post-it-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.post-it {
+    background-color: #ffb6c1; /* Rosa pastel */
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 1em;
+    position: relative;
+    transition: transform 0.2s;
+    cursor: pointer;
+    text-align: left;
+    overflow-wrap: break-word;
+}
+
+.post-it:hover {
+    transform: scale(1.05);
+}
+
+.post-it p {
+    margin: 0;
+}
+
+.post-it::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ffb6c1;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Las cosas que me gustan de Valuntina</h1>
+    </header>
+    <main>
+        <section class="intro">
+            <img src="foto_juntos.jpeg" alt="Foto juntos" class="foto">
+            <div class="content">
+                <box-icon type='solid' name='heart' color='#fff' size='lg'></box-icon>
+                <button><a href="#story" class="scroll">Descubrir</a></button>
+            </div>
+            <div class="bottom-curve"></div>
+        </section>
+        <section class="story" id="story">
+            <h2>Pero primero una historia</h2>
+            <p>El día de nuestra primera cita yo tenía mucha ansiedad... incluso estaba con acidez, jajajaja. Estuve todo el día así hasta que llegaste y se me pasó TODO. Te vi caminando por la vereda de enfrente y vos todavía no me habías visto. Recuerdo que me escondí en la esquina un toque y me arreglé porque estaba despeinado. Qué tonto. Pero es que estabas tan hermosa que no quería quedarme atrás. Nunca antes sentí lo mismo que sentí cuando me viste a los ojos por primera vez y me diste un beso en el cachete.</p>
+        </section>
+
+        <hr>
+
+
+        <h2 class="textoH2">Tocá cualquier botón!!</h2>
+        <section class="icons">
+            <div class="icon" data-aos="fade-right" onclick="mostrarTexto('happy-heart-eyes')"><box-icon name='happy-heart-eyes' size='lg'></box-icon></div>
+            <div class="icon" data-aos="fade-left" onclick="mostrarTexto('headphone')"><box-icon name='headphone' size='lg'></box-icon></div>
+            <div class="icon" data-aos="fade-right" onclick="mostrarTexto('heart')"><box-icon type='solid' name='heart' size='lg'></box-icon></div>
+            <div class="icon" data-aos="fade-left" onclick="mostrarTexto('male-female')"><box-icon name='male-female' size='lg'></box-icon></div>
+        </section>
+
+        <div class="contenido"></div>
+
+        <br>
+        <br>
+
+        <section class="music-section">
+            <p>Y ahora para musicalizar el momento, una canción que describe cómo me haces sentir...</p>
+            <div class="audio-player">
+                <button id="play-pause">▶</button>
+                <input type="range" id="seek-bar" value="0">
+                <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+            </div>
+        </section>
+        
+        <section class="timeline">
+            <h2>Nuestros momentos</h2>
+            <p>Esta es nuestra línea de tiempo y acá vamos a archivar los momentos juntos <3</p>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Primera Cita</h3>
+                <p>30 de mayo, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Primera vez en la cancha</h3>
+                <p>1 de Junio, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Primera vez en el cine</h3>
+                <p>7 de Junio, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Primera vez que viniste a casa</h3>
+                <p>9 de Junio, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Primera vez que te regalé flores</h3>
+                <p>13 de Junio, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Primera vez que viste a mi mamá</h3>
+                <p>15 de Junio, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Cuando fuimos al Mercat</h3>
+                <p>19 de Junio, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>Cuando fuimos a la Taylor Fest</h3>
+                <p>22 de Junio, 2023</p>
+            </div>
+            <div class="timeline-item" data-aos="fade-up">
+                <h3>El día que te volviste mi novia ❤</h3>
+                <p>23 de Junio, 2023</p>
+            </div>
+        </section>
+        
+        <section class="post-it-section">
+            <h2>Notitas para vos</h2>
+            <div class="post-it-container">
+                <div class="post-it" contenteditable="true">
+                    <p>Te amo mucho!!!!</p>
+                </div>
+                <div class="post-it" contenteditable="true">
+                    <p>Nunca estoy NO extrañándote</p>
+                </div>
+                <div class="post-it" contenteditable="true">
+                    <p>Tus ojos son la puerta hacia el alma más pura</p>
+                </div>
+                <div class="post-it" contenteditable="true">
+                    <p>Quiero que cocinemos juntos toda la vida</p>
+                </div>
+                <div class="post-it" contenteditable="true">
+                    <p>Quiero viajar con vos</p>
+                </div>
+                <div class="post-it" contenteditable="true">
+                    <p>Tu amor es lo más hermoso que hay!!</p>
+                </div>
+            </div>
+            
+        </section>
+        
+
+    </main>
+
+    <div class="carousel-overlay" id="carouselOverlay">
+        <span class="close" id="closeCarousel">&times;</span>
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-item active">
+                    <img src="cancha.jpeg" alt="Cancha">
+                    <div class="carousel-caption">Nuestra primera foto</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="lasheras.jpeg" alt="Las Heras">
+                    <div class="carousel-caption">Nuestra primer cita amorosa</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="reserva.jpeg" alt="Reserva">
+                    <div class="carousel-caption">La primera vez que fuimos solos a la cancha</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="parlantes.jpeg" alt="Parlantes">
+                    <div class="carousel-caption">Cuando fuimos a escuchar Evermore</div>
+                </div>                
+            </div>
+            <div class="carousel-nav left" id="prev">&lt;</div>
+            <div class="carousel-nav right" id="next">&gt;</div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>23/06/2023 - &#8734;</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    
+        document.querySelectorAll('a.scroll').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+    
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    
+        function mostrarTexto(icon) {
+            const contenido = document.querySelector('.contenido');
+            if (icon === 'happy-heart-eyes') {
+                contenido.innerHTML = '<p style="padding:10px;">Lista de cosas que me gustan de vos:</p><ul><li>Tu ojos</li><li>Tu sonrisa</li><li>Tu pelo</li><li>Tu cuerpo</li><li>Tu forma de amar</li><li>Tus caricias</li><li>Tu risa</li><li>Todo de vos</li></ul>';
+            } else if (icon === 'headphone') {
+                contenido.innerHTML = '<h4 style="padding:8px;">Las canciones que me recuerdan a vos: </h4><iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0Wa88c7GOS864gRGyegPqL?utm_source=generator" width="40%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
+            } else if (icon === 'heart') {
+                contenido.innerHTML = '<p style="padding:10px;">Sos el amor de mi vida. Con vos aprendo a amar todos los días <3. Atesoro cada regalo que me diste como si fuera una partecita de tu corazón, Valu</p>';
+            } else if (icon === 'male-female') {
+                document.getElementById('carouselOverlay').style.display = 'flex';
+                updateCarouselPosition(); // Ensure the carousel is positioned correctly
+            }
+        }
+    
+        document.getElementById('closeCarousel').addEventListener('click', function() {
+            document.getElementById('carouselOverlay').style.display = 'none';
+        });
+    
+        let startX;
+        const carousel = document.getElementById('carousel');
+        const items = document.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+    
+        carousel.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+    
+        carousel.addEventListener('touchmove', function(e) {
+            if (!startX) return;
+            let moveX = e.touches[0].clientX;
+            let diff = startX - moveX;
+            if (diff > 50) {
+                nextItem();
+                startX = null;
+            } else if (diff < -50) {
+                prevItem();
+                startX = null;
+            }
+        });
+    
+        document.getElementById('next').addEventListener('click', nextItem);
+document.getElementById('prev').addEventListener('click', prevItem);
+
+function nextItem() {
+    items[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + 1) % items.length;
+    items[currentIndex].classList.add('active');
+}
+
+function prevItem() {
+    items[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    items[currentIndex].classList.add('active');
+}
+
+function updateCarouselPosition() {
+    const width = carousel.parentElement.offsetWidth;
+    carousel.style.transform = `translateX(${-width * currentIndex}px)`;
+}
+
+const audio = new Audio('fearless.mp3');
+const playPauseButton = document.getElementById('play-pause');
+const seekBar = document.getElementById('seek-bar');
+const currentTimeSpan = document.getElementById('current-time');
+const durationSpan = document.getElementById('duration');
+
+playPauseButton.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        playPauseButton.textContent = '❚❚';
+    } else {
+        audio.pause();
+        playPauseButton.textContent = '▶';
+    }
+});
+
+audio.addEventListener('timeupdate', () => {
+    seekBar.value = (audio.currentTime / audio.duration) * 100;
+    currentTimeSpan.textContent = formatTime(audio.currentTime);
+    durationSpan.textContent = formatTime(audio.duration);
+});
+
+seekBar.addEventListener('input', () => {
+    audio.currentTime = (seekBar.value / 100) * audio.duration;
+});
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    seconds = Math.floor(seconds % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+    </script>
+    
+</body>
+</html>
