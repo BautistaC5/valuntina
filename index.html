@@ -393,6 +393,42 @@
     box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.1);
 }
 
+.photo-gallery {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.photo-gallery h2 {
+    margin-bottom: 20px;
+    color: #ffb6c1;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.gallery-item {
+    width: 45%;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
     </style>
 </head>
 <body>
@@ -479,29 +515,29 @@
             </div>
         </section>
         
-        <section class="post-it-section">
+        <section class="post-it-section"  style="margin-bottom: 50px;">
             <h2>Notitas para vos</h2>
+            <p>siempre que te sientas mal podés venir a leerlas...</p>
             <div class="post-it-container">
-                <div class="post-it" contenteditable="true">
+                <div class="post-it">
                     <p>Te amo mucho!!!!</p>
                 </div>
-                <div class="post-it" contenteditable="true">
+                <div class="post-it">
                     <p>Nunca estoy NO extrañándote</p>
                 </div>
-                <div class="post-it" contenteditable="true">
+                <div class="post-it">
                     <p>Tus ojos son la puerta hacia el alma más pura</p>
                 </div>
-                <div class="post-it" contenteditable="true">
+                <div class="post-it">
                     <p>Quiero que cocinemos juntos toda la vida</p>
                 </div>
-                <div class="post-it" contenteditable="true">
+                <div class="post-it">
                     <p>Quiero viajar con vos</p>
                 </div>
-                <div class="post-it" contenteditable="true">
+                <div class="post-it">
                     <p>Tu amor es lo más hermoso que hay!!</p>
                 </div>
             </div>
-            
         </section>
         
 
